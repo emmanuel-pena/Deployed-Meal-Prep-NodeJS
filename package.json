@@ -1,0 +1,65 @@
+{
+  "name": "recipe_prep-backend",
+  "version": "1.0.0",
+  "engines": {
+    "node": "16.x"
+  },
+  "description": "Project for CSE 115A",
+  "author": "Tyler Hayden, Adam Barsness, Emmanuel Pena, Shane Smith, Joshua Harding ",
+  "license": "UNLICENSED",
+  "repository": "https://git.ucsc.edu/jorhardi/cse-115a-meal-prep",
+  "devDependencies": {
+    "eslint": "*",
+    "eslint-config-google": "*",
+    "jest": "*",
+    "nodemailer-mock": "^1.5.11",
+    "nodemon": "*",
+    "supertest": "*"
+  },
+  "dependencies": {
+    "bcrypt": "*",
+    "body-parser": "*",
+    "cors": "*",
+    "dotenv": "*",
+    "express": "*",
+    "express-openapi-validator": "*",
+    "express-session": "*",
+    "google-auth-library": "^7.11.0",
+    "googleapis": "^95.0.0",
+    "handlebars": "^4.7.7",
+    "http-server": "^0.12.3",
+    "js-yaml": "*",
+    "jsonwebtoken": "*",
+    "nodemailer": "^6.7.2",
+    "pg": "*",
+    "react-scripts": "^5.0.1",
+    "swagger-ui-express": "*"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/server.js"
+    ],
+    "testMatch": [
+      "**/?(*.)+(spec|test).[jt]s?(x)"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "google"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 12
+    },
+    "rules": {
+      "indent": [
+        "warn",
+        2
+      ]
+    }
+  },
+  "scripts": {
+    "start": "node index.js",
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
+  }
+}
