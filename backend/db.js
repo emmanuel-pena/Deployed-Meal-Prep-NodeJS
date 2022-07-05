@@ -2,11 +2,7 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  host: 'ec2-44-195-162-77.compute-1.amazonaws.com',
-  port: 5432,
-  database: 'd5cmt028a3i4om',
-  user: 'lrjtfoybrfcbwe',
-  password: '118960869c1b4d3fc884d92d98596b93fbe75636792c58402a9080398778c1d8',
+   connectionString: process.env.DATABASE_URL,
 });
 
 exports.userExists = async (userInfo) => {
