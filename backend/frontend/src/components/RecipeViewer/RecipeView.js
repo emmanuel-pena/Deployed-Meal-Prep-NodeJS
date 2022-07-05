@@ -40,7 +40,7 @@ import globalContext from '../globalContext';
          const accessToken = user.accessToken;
          const body = {recipeId: recipe.id, RecipeObj: recipe};
 
-         fetch('https://mealprephelper-backend.herokuapp.com/favoriterecipe', {
+         fetch('https://mealprephelper.herokuapp.com/favoriterecipe', {
            method: 'POST',
            body: JSON.stringify(body),
            headers: new Headers({
