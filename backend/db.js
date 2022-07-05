@@ -2,11 +2,11 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  host: 'ec2-34-194-73-236.compute-1.amazonaws.com',
+  host: 'ec2-44-195-162-77.compute-1.amazonaws.com',
   port: 5432,
-  database: 'd19le3rr37lphv',
-  user: 'pjxfiistpvaczx',
-  password: 'ea2e812dce206e6e34595ed8e62a14025b33b71e10c1a54ecc1c655c35ef875d',
+  database: 'd5cmt028a3i4om',
+  user: 'lrjtfoybrfcbwe',
+  password: '118960869c1b4d3fc884d92d98596b93fbe75636792c58402a9080398778c1d8',
 });
 
 exports.userExists = async (userInfo) => {
