@@ -118,7 +118,7 @@ export default function GroceryList2() {
               return results.json();
             })
             .then((json) => {
-              const temp = json;
+              const temp = JSON.parse(json);
               setCurrentGroceryListTabInfo(temp);
               console.log(temp);
             });
@@ -206,7 +206,7 @@ export default function GroceryList2() {
           return results.json();
         })
         .then((json) => {
-          const temp = json;
+          const temp = JSON.parse(json);
           setCurrentGroceryLists(temp);
           console.log(json);
         });
@@ -256,7 +256,7 @@ export default function GroceryList2() {
         })
         .then((json) => {
           try { // insert recipe into the list with that list id
-            const param1 = json.listId;
+            const param1 = JSON.parse(json.listId);
             const param2 = 0;
             const param3 = { // a blank recipe so that no ingredients get rendered
               'id': 0,
@@ -288,8 +288,7 @@ export default function GroceryList2() {
               .then((jsonn) => {
                 console.log('In final .then of createNewList');
                 handleAddedBlankGroceryList();
-                console.log(jsonn);
-                const returned = jsonn;
+                const returned = JSON.parse(jsonn);
                 console.log(returned);
               })
               .catch((err) => {
