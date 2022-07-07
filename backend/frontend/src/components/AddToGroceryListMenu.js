@@ -60,6 +60,7 @@ function LongMenuTemp(props) {
   };
 
   const getCurrentGroceryLists = () => {
+    if (user) {
     const accessToken = user.accessToken;
       fetch('https://mealprephelper.herokuapp.com/grocerylists', {
         headers: new Headers({
@@ -81,6 +82,7 @@ function LongMenuTemp(props) {
       .catch((err) => {
         console.log(err);
       });
+      }
   };
 
   useEffect(() => {
