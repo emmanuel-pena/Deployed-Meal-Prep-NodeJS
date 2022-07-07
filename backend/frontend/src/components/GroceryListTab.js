@@ -121,6 +121,9 @@ export default function GroceryList2() {
               const temp = JSON.parse(json);
               setCurrentGroceryListTabInfo(temp);
               console.log(temp);
+            })
+            .catch((e) => {
+              console.log(e);
             });
         }
       } catch (e) {
@@ -191,7 +194,6 @@ export default function GroceryList2() {
   };
 
   const getCurrentGroceryLists = () => { // this is called after a new blank grocery list is created
-    try {
       const accessToken = user.accessToken;
       console.log('getting gl');
       fetch('https://mealprephelper.com/grocerylists', {
@@ -209,10 +211,10 @@ export default function GroceryList2() {
           const temp = JSON.parse(json);
           setCurrentGroceryLists(temp);
           console.log(json);
+        })
+        .catch((e) => {
+          console.log(e);
         });
-    } catch (e) {
-      console.log(e);
-    }
   };
 
   useEffect(() => {
@@ -235,7 +237,6 @@ export default function GroceryList2() {
 
     const accessToken = user.accessToken;
 
-    try { // create the new grocery list
       const listNameToAdd = newList;
       console.log(listNameToAdd);
       const body = {listName: listNameToAdd};
@@ -255,7 +256,6 @@ export default function GroceryList2() {
           return res.json();
         })
         .then((json) => {
-          try { // insert recipe into the list with that list id
             const param1 = JSON.parse(json.listId);
             const param2 = 0;
             const param3 = { // a blank recipe so that no ingredients get rendered
@@ -294,19 +294,11 @@ export default function GroceryList2() {
               .catch((err) => {
                 console.log(err);
               });
-          } catch (e) {
-            console.log('console.loggin e');
-            console.log(e);
-          }
           console.log('end of create new grocery list');
         })
         .catch((err) => {
           console.log(err);
         });
-    } catch (e) {
-      console.log('console.loggin e');
-      console.log(e);
-    }
 
     setNewList('');
   };

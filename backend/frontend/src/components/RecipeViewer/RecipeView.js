@@ -36,7 +36,6 @@ import globalContext from '../globalContext';
 
 
    const addToFavorites = () => {
-       try {
          const accessToken = user.accessToken;
          const body = {recipeId: recipe.id, RecipeObj: recipe};
 
@@ -59,9 +58,6 @@ import globalContext from '../globalContext';
            .catch((err) => {
              console.log(err);
            });
-       } catch (e) {
-         console.log(e);
-       }
   };
 
   const favoritesMessage = (favRes) => {

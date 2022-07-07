@@ -61,29 +61,28 @@ function LongMenuTemp(props) {
     setChanged(!temp);
   };
 
-    const getCurrentGroceryLists = () => {
-    try {
-      const accessToken = user.accessToken;
-      console.log('getting gl');
+  const getCurrentGroceryLists = () => {
+    const accessToken = user.accessToken;
+    console.log('getting gl');
       fetch('https://mealprephelper.herokuapp.com/grocerylists', {
         headers: new Headers({
           'Authorization': 'Bearer ' + accessToken,
         }),
       })
-        .then((results) => {
-          if (!results.ok) {
-            throw results;
-          }
-          return results.json();
-        })
-        .then((json) => {
-          const temp = json;
-          setCurrentGroceryLists(temp);
-          console.log(json);
-        });
-    } catch (e) {
-      console.log(e);
-    }
+      .then((results) => {
+        if (!results.ok) {
+          throw results;
+        }
+        return results.json();
+      })
+      .then((json) => {
+        const temp = json;
+        setCurrentGroceryLists(temp);
+        console.log(json);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -92,7 +91,6 @@ function LongMenuTemp(props) {
   }, [deletedAList, changed, currentGroceryListTabInfo]);
 
   const pustToExistingGroceryList = (event) => {
-    try {
       const accessToken = user.accessToken;
 
       const param1 = event.target.innerText;
@@ -128,10 +126,7 @@ function LongMenuTemp(props) {
         .catch((err) => {
           console.log(err);
         });
-    } catch (e) {
-      console.log('console.loggin e');
-      console.log(e);
-    }
+
     handleClose();
   };
 
@@ -146,7 +141,6 @@ function LongMenuTemp(props) {
 
     const accessToken = user.accessToken;
 
-    try { // create the new grocery list and return an objet containing it's list id.
       const listNameToAdd = newList;
       console.log(listNameToAdd);
       const body = {listName: listNameToAdd};
@@ -166,7 +160,6 @@ function LongMenuTemp(props) {
           return res.json();
         })
         .then((json) => {
-          try { // insert recipe into the list with that list id
             const param1 = json.listId;
             console.log(param1);
             const param2 = props.recipe.id;
@@ -200,17 +193,10 @@ function LongMenuTemp(props) {
               .catch((err) => {
                 console.log(err);
               });
-          } catch (e) {
-            console.log('console.loggin e');
-            console.log(e);
-          }
         })
         .catch((err) => {
           console.log(err);
         });
-    } catch (e) {
-      console.log('console.loggin e');
-      console.log(e);
     }
 
     setNewList('');

@@ -64,7 +64,6 @@ const LoginForm = () => {
   };
 
   const handleGoogleSuccess = (googleData) => {
-    try {
       fetch('https://mealprephelper.herokuapp.com/google-login', {
         method: 'POST',
         body: JSON.stringify({
@@ -93,9 +92,6 @@ const LoginForm = () => {
         .catch((err) => {
           console.log(err);
         });
-    } catch (e) {
-      console.log('console.loggin e');
-      console.log(e);
     }
 
     handleClose();
@@ -106,7 +102,6 @@ const LoginForm = () => {
   };
 
   const loginUser = () => {
-    try {
       setLoginResponse(null);
       console.log('inside loginUser)');
       console.log('Logging in user!');
@@ -155,10 +150,6 @@ const LoginForm = () => {
         .catch((err) => {
           console.log(err);
         });
-    } catch (e) {
-      console.log('console.loggin e');
-      console.log(e);
-    }
   };
 
   const handleLogin = () => {

@@ -139,19 +139,22 @@ function GroceryList({recipeResults, setSearched}) {
           'Content-Type': 'application/json',
         }),
       })
-      .then((response) => response.json())
+        .then((response) => response.json())
         .then((data) => data.map((recobj) => {
           grocRecipes.push(recobj.id.toString());
         }))
-      .then(() => console.log(grocRecipes))
-      .then(() =>
-      grocRecipes.map((recipeID) => {
-        fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=5ae3ccf967fb408688f979b5cf40ecec`) // 715497 (Berry Smoothie recipe id from featured page)
-          .then((response) => response.json())
-          .then((data) => grocArray.push(data))
-          .then(() => console.log(grocArray))
-          .then(() => setGrocIngredients(grocArray));
-      }));
+        .then(() => console.log(grocRecipes))
+        .then(() =>
+          grocRecipes.map((recipeID) => {
+            fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=5ae3ccf967fb408688f979b5cf40ecec`) // 715497 (Berry Smoothie recipe id from featured page)
+              .then((response) => response.json())
+              .then((data) => grocArray.push(data))
+              .then(() => console.log(grocArray))
+              .then(() => setGrocIngredients(grocArray));
+          }))
+        .catch((e) => {
+          console.log(e);
+        });
       // setGrocIngredients(grocArray);
     }, []);
 

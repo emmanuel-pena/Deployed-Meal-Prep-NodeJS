@@ -55,7 +55,6 @@ const SignupForm = () => {
   };
 
   const createUser = () => {
-    try {
       console.log('inside createUser)');
 
         setSignUpMessage('waiting');
@@ -90,9 +89,6 @@ const SignupForm = () => {
           .catch((err) => {
             console.log(err);
           });
-    } catch (e) {
-
-    }
   };
 
   const creationResponse = (message) => {

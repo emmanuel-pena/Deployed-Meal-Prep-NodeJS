@@ -25,8 +25,6 @@ const CalendarComp = () => {
   const getCalendarTabInfo = () => { // gets all grocery list tab info from data base
     console.log('In calendarTabInfo.js get grocery list tab info');
 
-    try {
-      console.log(user);
       if (user) {
         const accessToken = user.accessToken;
         console.log(accessToken);
@@ -57,7 +55,7 @@ const CalendarComp = () => {
                 item.end = new Date(temp[i].planned + 'T12:00:00');
                 item.recipe = temp[i].recipe;
 
-                const copy = {title: item.title, allDay: item.allDay, start: item.start, end: item.end, recipe: item.recipe};
+                const copy = { title: item.title, allDay: item.allDay, start: item.start, end: item.end, recipe: item.recipe };
                 array.push(copy);
               } else if (temp[i].meal === 'Lunch') {
                 item.title = temp[i].title;
@@ -66,7 +64,7 @@ const CalendarComp = () => {
                 item.end = new Date(temp[i].planned + 'T17:00:00');
                 item.recipe = temp[i].recipe;
 
-                const copy = {title: item.title, allDay: item.allDay, start: item.start, end: item.end, recipe: item.recipe};
+                const copy = { title: item.title, allDay: item.allDay, start: item.start, end: item.end, recipe: item.recipe };
                 array.push(copy);
               } else if (temp[i].meal === 'Dinner') {
                 item.title = temp[i].title;
@@ -75,18 +73,18 @@ const CalendarComp = () => {
                 item.end = new Date(temp[i].planned + 'T22:00:00');
                 item.recipe = temp[i].recipe;
 
-                const copy = {title: item.title, allDay: item.allDay, start: item.start, end: item.end, recipe: item.recipe};
+                const copy = { title: item.title, allDay: item.allDay, start: item.start, end: item.end, recipe: item.recipe };
                 array.push(copy);
               }
             }
 
             setCurrentCalendarTabInfo(array);
             console.log(array);
+          })
+          .catch((err) => {
+            console.log(err);
           });
       }
-    } catch (e) {
-      console.log(e);
-    }
   };
 
   useEffect(() => {
