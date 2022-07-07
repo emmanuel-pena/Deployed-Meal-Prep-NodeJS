@@ -198,7 +198,7 @@ export default function GroceryList2() {
   const getCurrentGroceryLists = () => { // this is called after a new blank grocery list is created
       const accessToken = user.accessToken;
       console.log('getting gl');
-      fetch('https://mealprephelper.com/grocerylists', {
+      fetch('https://mealprephelper.herokuapp.com/grocerylists', {
         headers: new Headers({
           'Authorization': 'Bearer ' + accessToken,
           'Accept': 'application/json',
@@ -245,7 +245,7 @@ export default function GroceryList2() {
       console.log(listNameToAdd);
       const body = {listName: listNameToAdd};
 
-      fetch('https://mealprephelper.com/grocerylists', {
+      fetch('https://mealprephelper.herokuapp.com/grocerylists', {
         method: 'POST',
         body: JSON.stringify(body),
         headers: new Headers({
@@ -275,7 +275,7 @@ export default function GroceryList2() {
             const body = {groceryListId: param1, recipeId: param2, RecipeObj: param3};
             console.log(body);
 
-            fetch('https://mealprephelper.com/groceryrecipe', {
+            fetch('https://mealprephelper.herokuapp.com/groceryrecipe', {
               method: 'POST',
               body: JSON.stringify(body),
               headers: new Headers({
