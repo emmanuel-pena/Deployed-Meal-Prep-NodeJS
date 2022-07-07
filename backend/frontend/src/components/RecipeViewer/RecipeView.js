@@ -31,7 +31,6 @@ import globalContext from '../globalContext';
 
   useEffect(() => {
     setRecipe(recipeProp);
-    console.log(recipeProp);
   }, [recipeProp]);
 
 

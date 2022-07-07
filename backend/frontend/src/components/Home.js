@@ -48,7 +48,6 @@ const Home = () => {
   // Use this function whenever the 'Global' recipeResults should be changed from any component
   function handleResults(newResults) {
     setRecipeResults(newResults);
-    console.log(newResults);
     setSearched(true);
     setView('Meal Results');
   }

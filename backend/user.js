@@ -243,7 +243,6 @@ exports.getGroceryLists = async (req, res) => {
 
 exports.getAllFromGroceryList = async (req, res) => {
   const listId = req.query.groceryListID;
-  console.log(listId);
   const memberId = req.userID;
 
   const gotten = await db.getAllFromGroceryList(listId);
@@ -282,17 +281,12 @@ exports.deleteFromFavorites = async (req, res) => {
 exports.deleteGroceryList = async (req, res) => {
   const listNamee = req.query.listName;
   const memberIdd = req.userID;
-  console.log('inside delete gl');
-  console.log(listNamee);
-  console.log(memberIdd);
 
   const deleted = await db.deleteGroceryList(listNamee, memberIdd);
-  console.log('user.js line 286)\n');
-  console.log(deleted);
+
   if (deleted === null) {
     res.status(400).send();
   } else {
-    console.log('user.js line 292)\n');
     res.sendStatus(204);
   }
 };
@@ -359,8 +353,6 @@ exports.getRecipesAndListNames = async (req, res) => {
 
   // SELECT DISTINCT r.recipe, gr.quantity, gl.list_name, gl.created_at FROM recipe r, grocery_list gl, grocerys_recipe gr WHERE r.id = gr.recipe_id AND gl.id = gr.grocery_list_id AND gl.member_id = $1
   const gotten = await db.getRecipesAndListNames(userId);
-  console.log('user.js line 359)\n');
-  console.log(gotten);
 
   if (gotten === null) {
     res.status(400).send();

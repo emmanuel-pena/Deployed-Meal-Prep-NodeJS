@@ -9,13 +9,12 @@ function SearchBar({stateChanger, children}) {
     const handleSearch = (event) => {
       const searchWord = event.target.value;
       setQuery(searchWord);
-      // console.log(query);
     };
 
 
     const fetchRequest = () => {
       setIsSending(true);
-       // console.log(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=10&apiKey=5ae3ccf967fb408688f979b5cf40ecec`);
+
       fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=10&apiKey=2b14cdb3c6df4349be2a2bf80f70ae77`)
         .then((response) =>{
           if (!response.ok) {

@@ -98,8 +98,6 @@ exports.updatePassword = async (id, newPassword) => {
 };
 
 insertGoogleUserToDb = async (email) => {
-  console.log('inside insert db');
-
   const isActivated = 'true';
   const accType = 'google';
 
@@ -114,7 +112,6 @@ insertGoogleUserToDb = async (email) => {
 };
 
 exports.upsertGoogleUser = async (email) => {
-  console.log('inside upsert db');
   const select = 'SELECT * FROM member WHERE email = $1';
   const query = {
     text: select,
@@ -125,10 +122,8 @@ exports.upsertGoogleUser = async (email) => {
 
   if (rows.length > 0) {
     // user already in our database
-    console.log('Google user already existed\n');
     return;
   } else {
-    console.log('Saving google user to db');
     await insertGoogleUserToDb(email);
     return;
   }
@@ -136,11 +131,6 @@ exports.upsertGoogleUser = async (email) => {
 
 insertIntoRecipes = async (recipeId, recipee) => {
   const recipe = JSON.stringify(recipee);
-
-  console.log('logging recipe stringified version that will go in db:\n');
-  console.log(recipe);
-  console.log('logging recipe object version:\n');
-  console.log(recipee);
 
   const select = 'INSERT INTO recipe (id, info) VALUES ($1, $2) ON CONFLICT DO NOTHING';
   const query = {
@@ -172,14 +162,9 @@ exports.addToFavorites = async (info, userId) => {
   const recipeId = info.recipeId;
   const recipe = info.RecipeObj;
 
-  console.log(memberId);
-  console.log(recipeId);
-  console.log(recipe);
-
   const exists = await searchExistingFavorites(memberId, recipeId);
 
   if (exists === 1) {
-    console.log('Already an existing favorites table entry for fields:\n');
     const foundObj = {};
     foundObj.memberId = memberId;
     foundObj.recipeId = recipeId;
@@ -194,18 +179,13 @@ exports.addToFavorites = async (info, userId) => {
     };
 
 
-    const { rows } = await pool.query(query);
-    console.log(rows);
-    console.log(rows.length);
+    const {rows} = await pool.query(query);
 
     if (rows.length > 0) {
       const returnedObj = {};
-      console.log('in final returns of addToFavorites');
-      console.log(rows.length);
+
       returnedObj.memberId = memberId;
       returnedObj.recipeId = recipeId;
-
-      console.log(returnedObj);
 
       return returnedObj;
     } else {
@@ -231,20 +211,14 @@ exports.addGroceryList = async (info, userId) => {
   };
 
 
-  const { rows } = await pool.query(query);
-  console.log(rows);
-  console.log(rows.length);
+  const {rows} = await pool.query(query);
 
   if (rows.length > 0) {
     const returnedObj = {};
-    console.log('in final returns of addGroceryList');
-    console.log(rows.length);
     returnedObj.listName = listName;
     returnedObj.date = date;
     returnedObj.memberId = memberId;
     returnedObj.listId = rows[0].id;
-
-    console.log(returnedObj);
 
     return returnedObj;
   } else {
@@ -292,8 +266,6 @@ exports.addToNewGroceryList = async (info, userId) => {
 
     returnedObj.groceryListId = groceryListId;
     returnedObj.recipeId = recipeId;
-    console.log('duplicate, so just updated count for inputs:\n');
-    console.log(returnedObj);
 
     return returnedObj;
   } else {
@@ -306,18 +278,13 @@ exports.addToNewGroceryList = async (info, userId) => {
     };
 
 
-    const { rows } = await pool.query(query);
-    console.log(rows);
-    console.log(rows.length);
+    const {rows} = await pool.query(query);
 
     if (rows.length > 0) {
       const returnedObj = {};
-      console.log('in final returns of addToNewGroceryList');
-      console.log(rows.length);
+
       returnedObj.groceryListId = groceryListId;
       returnedObj.recipeId = recipeId;
-
-      console.log(returnedObj);
 
       return returnedObj;
     } else {
@@ -361,8 +328,6 @@ exports.addToExistingGroceryList = async (info, userId) => {
 
     returnedObj.groceryListId = groceryListId;
     returnedObj.recipeId = recipeId;
-    console.log('duplicate, so just updated count for inputs:\n');
-    console.log(returnedObj);
 
     return returnedObj;
   } else {
@@ -376,17 +341,12 @@ exports.addToExistingGroceryList = async (info, userId) => {
 
 
     const { rows } = await pool.query(query);
-    console.log(rows);
-    console.log(rows.length);
 
     if (rows.length > 0) {
       const returnedObj = {};
-      console.log('in final returns of AddToExistingGroceryList');
-      console.log(rows.length);
+
       returnedObj.groceryListId = groceryListId;
       returnedObj.recipeId = recipeId;
-
-      console.log(returnedObj);
 
       return returnedObj;
     } else {
@@ -449,16 +409,14 @@ exports.getGroceryLists = async (memberIdd) => {
 };
 
 exports.getAllFromGroceryList = async (listID) => {
-  console.log(listID);
   const select = 'SELECT gr.quantity, gl.member_id, r.id, r.info, gl.list_name FROM grocerys_recipe AS gr INNER JOIN grocery_list AS gl ON gl.id = gr.grocery_list_id INNER JOIN member as m ON m.id = gl.member_id INNER JOIN recipe AS r ON r.id = gr.recipe_id WHERE gr.grocery_list_id = $1 ';
   const query = {
     text: select,
     values: [listID],
   };
 
-  const { rows } = await pool.query(query);
+  const {rows} = await pool.query(query);
 
-  console.log(rows);
   return rows.length > 0 ? rows : undefined;
 };
 
@@ -491,9 +449,7 @@ exports.deleteGroceryList = async (listNamee, memberIdd) => {
     values: [listName, memberId],
   };
 
-  const { rows } = await pool.query(query);
-  console.log('db.js line 495)\n');
-  console.log(rows);
+  const {rows} = await pool.query(query);
 
   if (rows.length > 0) {
     return rows.length;
@@ -539,7 +495,6 @@ exports.deleteFromGroceryList = async (memberIdd, groceryListIdd, recipeIdd) => 
     // increment count && return something not null;
     await decrementGrocerysRecipeCount(groceryListId, recipeId);
 
-    console.log('duplicate, so just decremented count and returning -1:\n');
     return -1;
   } else {
     const select = 'DELETE FROM grocerys_recipe WHERE grocery_list_id = $1 AND recipe_id = $2 RETURNING *';
@@ -565,8 +520,7 @@ exports.addToMealCalendarTable = async (info, userIdd) => {
   const recipeId = info.recipeId;
   const recipe = info.RecipeObj;
   const recipeName = info.RecipeObj.title;
-  console.log('db.js lines 570');
-  console.log(recipeName);
+
   const date = info.date;
   const plannedDate = date.replace(/(\d\d)\/(\d\d)\/(\d{4})/, "$3-$1-$2");
 
@@ -603,9 +557,8 @@ exports.getAllFromMealCalendarTable = async (userIdd) => {
   };
 
 
-  const { rows } = await pool.query(query);
-  console.log('db.js rows)');
-  console.log(rows);
+  const {rows} = await pool.query(query);
+
   let array = [];
   let item = { meal: '', title: '', planned: '', recipe: '' };
 
@@ -618,12 +571,6 @@ exports.getAllFromMealCalendarTable = async (userIdd) => {
     const copy = { meal: item.meal, title: item.title, planned: item.planned, recipe: item.recipe };
     array.push(copy);
   }
-
-  console.log('db.js array)');
-  console.log(array);
-
-  console.log('db.js rows.length)');
-  console.log(rows.length);
 
   if (rows.length > 0) {
     return array;
@@ -655,16 +602,14 @@ exports.deleteFromMealCalendarTable = async (datee, mealIdd, userIdd, mealTypee)
 exports.getRecipesAndListNames = async (userIdd) => {
 
   const select = 'SELECT r.info, gr.quantity, gl.list_name, gl.created_at FROM recipe r, grocery_list gl, grocerys_recipe gr WHERE r.id = gr.recipe_id AND gl.id = gr.grocery_list_id AND gl.member_id = $1';
-  console.log('db.js:\n:');
-  console.log(userIdd);
+
   const query = {
     text: select,
     values: [userIdd],
   };
 
-  const { rows } = await pool.query(query);
-  console.log('db.js:\n:');
-  console.log(rows);
+  const {rows} = await pool.query(query);
+
   let returnedArray = [];
   let infoObj = { recipe: '', quantity: 0, listName: '', createdAt: '' };
 
@@ -677,8 +622,7 @@ exports.getRecipesAndListNames = async (userIdd) => {
     const copy = { recipe: infoObj.recipe, quantity: infoObj.quantity, listName: infoObj.listName, createdAt: infoObj.createdAt };
     returnedArray.push(copy);
   }
-  console.log('db.js:\n:');
-  console.log(returnedArray);
+
   if (rows.length > 0) {
     return returnedArray;
   }
