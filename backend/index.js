@@ -55,7 +55,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend/build/index.html'));
 });
 
-app.listen(process.env.PORT || 3010, () => {
-  console.log(`Server Running on port ${process.env.PORT || 3010}`);
+app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
+  console.log(`Server Running on port ${process.env.PORT || 3000}`);
   console.log('API Testing UI: http://localhost:3010/v0/api-docs/');
 });
