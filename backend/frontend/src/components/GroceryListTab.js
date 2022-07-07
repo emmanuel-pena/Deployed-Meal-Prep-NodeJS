@@ -96,7 +96,6 @@ export default function GroceryList2() {
   };
 
   const getCurrentGroceryListTabInfo = async () => { // gets all grocery list tab info from data base
-
       try {
         console.log(user);
         if (user) {
