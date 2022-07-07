@@ -42,14 +42,12 @@ function LongMenuTemp(props) {
 
   const handleChange = (event) => {
     setNewList(event.target.value);
-    console.log(newList);
   };
 
   const [openDialog, setOpenDialog] = React.useState(false);
 
   const handleClickOpenDialog = () => {
     setOpenDialog(true);
-    console.log(currentGroceryLists);
   };
 
   const handleCloseDialog = () => {
@@ -63,7 +61,6 @@ function LongMenuTemp(props) {
 
   const getCurrentGroceryLists = () => {
     const accessToken = user.accessToken;
-    console.log('getting gl');
       fetch('https://mealprephelper.herokuapp.com/grocerylists', {
         headers: new Headers({
           'Authorization': 'Bearer ' + accessToken,
@@ -80,7 +77,6 @@ function LongMenuTemp(props) {
       .then((json) => {
         const temp = json;
         setCurrentGroceryLists(temp);
-        console.log(json);
       })
       .catch((err) => {
         console.log(err);
@@ -89,21 +85,16 @@ function LongMenuTemp(props) {
 
   useEffect(() => {
     getCurrentGroceryLists();
-    console.log('getting grocery lists again');
   }, [deletedAList, changed, currentGroceryListTabInfo]);
 
   const pustToExistingGroceryList = (event) => {
       const accessToken = user.accessToken;
 
       const param1 = event.target.innerText;
-      console.log(param1);
       const param2 = props.recipe.id;
-      console.log(param2);
       const param3 = props.recipe;
-      console.log(param3);
 
       const body = {listName: param1, recipeId: param2, RecipeObj: param3};
-      console.log(body);
 
       fetch('https://mealprephelper.herokuapp.com/groceryrecipeexisting', {
         method: 'POST',
@@ -120,10 +111,8 @@ function LongMenuTemp(props) {
           return res.json();
         })
         .then((json) => {
-          console.log('In final .then of pushToExistingList');
           enqueueSnackbar('Successfully added recipe to list!', 'success');
           handleChangedCurrrentGroceryList();
-          console.log(json);
         })
         .catch((err) => {
           console.log(err);
@@ -137,14 +126,13 @@ function LongMenuTemp(props) {
 
     if (prelimCheck === '') {
       handleClose();
-      console.log('returning after doing nothing because the newGroceryListName was an empty string');
       return;
     }
 
     const accessToken = user.accessToken;
 
       const listNameToAdd = newList;
-      console.log(listNameToAdd);
+
       const body = {listName: listNameToAdd};
 
       fetch('https://mealprephelper.herokuapp.com/grocerylists', {
@@ -163,12 +151,10 @@ function LongMenuTemp(props) {
         })
         .then((json) => {
             const param1 = json.listId;
-            console.log(param1);
             const param2 = props.recipe.id;
             const param3 = props.recipe;
 
             const body = {groceryListId: param1, recipeId: param2, RecipeObj: param3};
-            console.log(body);
 
             fetch('https://mealprephelper.herokuapp.com/groceryrecipe', {
               method: 'POST',
@@ -185,12 +171,8 @@ function LongMenuTemp(props) {
                 return res.json();
               })
               .then((jsonn) => {
-                console.log('In final .then pf pushToNewList');
                 handleChangedCurrrentGroceryList();
                 enqueueSnackbar('Successfully added recipe to list!', 'success');
-                console.log(jsonn);
-                const returned = jsonn;
-                console.log(returned);
               })
               .catch((err) => {
                 console.log(err);

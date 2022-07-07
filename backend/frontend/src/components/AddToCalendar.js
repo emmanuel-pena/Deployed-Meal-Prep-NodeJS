@@ -79,7 +79,6 @@ export default function LongMenuCal(props) {
 
   const handleChange = (event) => {
     setNewDate(event.target.value);
-    console.log(newDate);
   };
 
   const [openDialog, setOpenDialog] = React.useState(false);
@@ -111,7 +110,6 @@ export default function LongMenuCal(props) {
          const param4 = date;
 
         const body = {mealType: param1, recipeId: param2, RecipeObj: param3, date: param4};
-        console.log(body);
 
       fetch('https://mealprephelper.herokuapp.com/calendarrecipe', {
           method: 'POST',
@@ -129,14 +127,11 @@ export default function LongMenuCal(props) {
           })
           .then((json) => {
             handleChangedCalendar();
-            console.log('In final .then of handleCalendarAdd');
-            console.log(json);
           })
           .catch((err) => {
             console.log(err);
           });
     } catch (e) {
-        console.log('console.loggin e');
         console.log(e);
     }
   };

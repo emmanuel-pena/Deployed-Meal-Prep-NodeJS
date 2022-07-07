@@ -93,17 +93,14 @@ export default function GroceryList2() {
 
   const handleChangeNewList = (event) => {
     setNewList(event.target.value);
-    console.log(newList);
   };
 
   const getCurrentGroceryListTabInfo = async () => { // gets all grocery list tab info from data base
-    console.log('In GroceryListTabInfo.js get grocery list tab info');
 
       try {
         console.log(user);
         if (user) {
           const accessToken = user.accessToken;
-          console.log(accessToken);
 
           await fetch('https://mealprephelper.herokuapp.com/recipesandlistnames', {
             headers: new Headers({
@@ -116,13 +113,11 @@ export default function GroceryList2() {
               if (!results.ok) {
                 throw results;
               }
-              console.log(results);
               return results.json();
             })
             .then((json) => {
               const temp = json;
               setCurrentGroceryListTabInfo(temp);
-              console.log(temp);
             })
             .catch((e) => {
               console.log(e);
@@ -161,13 +156,10 @@ export default function GroceryList2() {
 
   const handleClickGarbage = async (key) => {
     try {
-      console.log('inside click garbage');
       const accessToken = user.accessToken;
-      console.log(accessToken);
       const param = key;
-      console.log(param);
 
-      await fetch(`https://mealprephelper.com/grocerylists?listName=${param}`, {
+      await fetch(`https://mealprephelper.herokuapp.com/grocerylists?listName=${param}`, {
         method: 'DELETE',
         headers: new Headers({
           'Authorization': 'Bearer ' + accessToken,
@@ -188,7 +180,6 @@ export default function GroceryList2() {
 
   const handleClickOpenDialog = () => {
     setOpenDialog(true);
-    console.log(currentGroceryLists);
   };
 
   const handleCloseDialog = () => {
@@ -197,7 +188,6 @@ export default function GroceryList2() {
 
   const getCurrentGroceryLists = () => { // this is called after a new blank grocery list is created
       const accessToken = user.accessToken;
-      console.log('getting gl');
       fetch('https://mealprephelper.herokuapp.com/grocerylists', {
         headers: new Headers({
           'Authorization': 'Bearer ' + accessToken,
@@ -223,7 +213,6 @@ export default function GroceryList2() {
 
   useEffect(() => {
     getCurrentGroceryLists();
-    console.log('getting grocery lists again');
   }, [addedBlankGroceryList]);
 
   const handleAddedBlankGroceryList = () => {
@@ -242,7 +231,6 @@ export default function GroceryList2() {
     const accessToken = user.accessToken;
 
       const listNameToAdd = newList;
-      console.log(listNameToAdd);
       const body = {listName: listNameToAdd};
 
       fetch('https://mealprephelper.herokuapp.com/grocerylists', {
@@ -273,7 +261,6 @@ export default function GroceryList2() {
             };
 
             const body = {groceryListId: param1, recipeId: param2, RecipeObj: param3};
-            console.log(body);
 
             fetch('https://mealprephelper.herokuapp.com/groceryrecipe', {
               method: 'POST',
@@ -290,15 +277,12 @@ export default function GroceryList2() {
                 return res.json();
               })
               .then((jsonn) => {
-                console.log('In final .then of createNewList');
                 handleAddedBlankGroceryList();
                 const returned = jsonn;
-                console.log(returned);
               })
               .catch((err) => {
                 console.log(err);
               });
-          console.log('end of create new grocery list');
         })
         .catch((err) => {
           console.log(err);

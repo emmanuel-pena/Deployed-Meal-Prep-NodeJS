@@ -82,7 +82,6 @@ const LoginForm = () => {
         })
         .then((json) => {
           localStorage.setItem('user', JSON.stringify(json));
-          console.log(json);
           updateUser(json);
           setLoginUser(JSON.parse(localStorage.getItem('user')));
           setLoginStatus(true);
@@ -102,8 +101,6 @@ const LoginForm = () => {
 
   const loginUser = () => {
       setLoginResponse(null);
-      console.log('inside loginUser)');
-      console.log('Logging in user!');
 
       const emailValidator = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -114,10 +111,8 @@ const LoginForm = () => {
 
       if ((param1).match(emailValidator)) {
         body = {email: param1, password: param2};
-        console.log(body);
       } else {
         body = {username: param1, password: param2};
-        console.log(body);
       }
 
       fetch('https://mealprephelper.herokuapp.com/login', {

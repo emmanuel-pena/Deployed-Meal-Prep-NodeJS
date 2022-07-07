@@ -55,8 +55,6 @@ const SignupForm = () => {
   };
 
   const createUser = () => {
-      console.log('inside createUser)');
-
         setSignUpMessage('waiting');
 
         const param1 = values.username;
@@ -64,7 +62,6 @@ const SignupForm = () => {
         const param3 = values.password;
 
         const body = {username: param1, email: param2, password: param3};
-        console.log(body);
 
       fetch('https://mealprephelper.herokuapp.com/user', {
           method: 'POST',
@@ -80,7 +77,6 @@ const SignupForm = () => {
             alert('Server error');
             throw res;
           } else if (res.ok) {
-            console.log('fetched post user');
             setSignUpMessage('Your account has been created. Please check your email for a verification link!');
 
             return;

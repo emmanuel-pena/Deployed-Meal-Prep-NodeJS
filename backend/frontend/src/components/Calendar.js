@@ -23,11 +23,8 @@ const CalendarComp = () => {
   const user = useUser();
 
   const getCalendarTabInfo = () => { // gets all grocery list tab info from data base
-    console.log('In calendarTabInfo.js get grocery list tab info');
-
       if (user) {
         const accessToken = user.accessToken;
-        console.log(accessToken);
 
         fetch('https://mealprephelper.herokuapp.com/calendarrecipe', {
           headers: new Headers({
@@ -40,12 +37,10 @@ const CalendarComp = () => {
             if (!results.ok) {
               throw results;
             }
-            console.log(results);
             return results.json();
           })
           .then((json) => {
             const temp = json;
-            console.log(temp);
             const item = {};
             const array = [];
 
@@ -81,7 +76,6 @@ const CalendarComp = () => {
             }
 
             setCurrentCalendarTabInfo(array);
-            console.log(array);
           })
           .catch((err) => {
             console.log(err);
@@ -90,19 +84,16 @@ const CalendarComp = () => {
   };
 
   useEffect(() => {
-    console.log('getting calendar tab info');
     getCalendarTabInfo();
   }, [user, changedCalendar]);
 
   const handleSelected = (event) => {
     setSelected(event);
     console.info('[handleSelected - event]', event);
-    console.log(event.recipe.id);
     openRecipeViewer(event.recipe.id);
   };
 
   const openRecipeViewer = async (id) => {
-    console.log(id);
     setViewerOpen(true);
     const recipeInfo = await getRecipeInfo(id);
     if (recipeInfo) {
