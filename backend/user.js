@@ -221,9 +221,9 @@ exports.getAllFromFavorites = async (req, res) => {
   if (gotten === null) {
     res.status(400).send();
   } else if (gotten === []) {
-    res.status(200).send([]);
+    res.status(200).send(JSON.stringify([]));
   } else {
-    res.status(200).send(gotten);
+    res.status(200).send(JSON.stringify(gotten));
   }
 };
 
@@ -235,9 +235,9 @@ exports.getGroceryLists = async (req, res) => {
   if (gotten === null) {
     res.status(400).send();
   } else if (gotten == []) {
-    res.status(200).send(gotten);
+    res.status(200).send(JSON.stringify([]));
   } else {
-    res.status(200).send(gotten);
+    res.status(200).send(JSON.stringify(gotten));
   }
 };
 
@@ -261,7 +261,7 @@ exports.getAllFromGroceryList = async (req, res) => {
     return item;
   });
 
-  res.status(200).send(gotten);
+  res.status(200).send(JSON.stringify(gotten));
 };
 
 
@@ -333,9 +333,9 @@ exports.getFromMealCalendarTable = async (req, res) => {
   if (gotten === null) {
     res.status(400).send();
   } else if (gotten === []) {
-    res.status(200).send(gotten);
+    res.status(200).send(JSON.stringify([]));
   } else {
-    res.status(200).send(gotten);
+    res.status(200).send(JSON.stringify(gotten));
   }
 };
 
@@ -365,8 +365,8 @@ exports.getRecipesAndListNames = async (req, res) => {
   if (gotten === null) {
     res.status(400).send();
   } else if (gotten === []) {
-    res.status(200).send(gotten);
+    res.status(200).send(JSON.stringify(gotten));
   } else {
-    res.status(200).send(gotten);
+    res.status(200).send(JSON.stringify(gotten));
   }
 };
