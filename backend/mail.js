@@ -35,7 +35,7 @@ exports.sendMail = async (email, subject, emailContent) => {
       },
     });
     const mailOptions = {
-      from: `MealPrep <${CLIENT_EMAIL}>`,
+      from: `Meal Prep Helper <${CLIENT_EMAIL}>`,
       to: email,
       subject: subject,
       html: emailContent,
@@ -51,8 +51,8 @@ exports.sendMail = async (email, subject, emailContent) => {
 
 exports.createEmail = async (token, username, isVerificationEmail) => {
   let filePath = __dirname;
-  let subject = `[MealPrep]`;
-  let link = 'http://localhost:3000';
+  let subject = `[Email Confirmation - Meal Prep Helper]`;
+  let link = 'https://mealprephelper.herokuapp.com';
   if (isVerificationEmail) {
     subject += `- Please confirm your Email account!`;
     filePath += '/data/email_template.html';
