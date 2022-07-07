@@ -22,26 +22,26 @@ app.post('/forgotPassword', user.sendResetPassword);
 app.post('/resetPassword', auth.checkResetPasswordToken, user.resetPassword);
 
 // public API endspoints go here ----
-app.post('/v0/user', user.createUser);
+app.post('/user', user.createUser);
 
-app.post('/v0/favoriterecipe', auth.checkAccessToken, user.addToFavorites);
-app.get('/v0/favoriterecipe', auth.checkAccessToken, user.getAllFromFavorites);
-app.delete('/v0/favoriterecipe', auth.checkAccessToken, user.deleteFromFavorites);
+app.post('/favoriterecipe', auth.checkAccessToken, user.addToFavorites);
+app.get('/favoriterecipe', auth.checkAccessToken, user.getAllFromFavorites);
+app.delete('/favoriterecipe', auth.checkAccessToken, user.deleteFromFavorites);
 
-app.post('/v0/grocerylists', auth.checkAccessToken, user.addGroceryList);
-app.get('/v0/grocerylists', auth.checkAccessToken, user.getGroceryLists);
-app.delete('/v0/grocerylists', auth.checkAccessToken, user.deleteGroceryList);
+app.post('/grocerylists', auth.checkAccessToken, user.addGroceryList);
+app.get('/grocerylists', auth.checkAccessToken, user.getGroceryLists);
+app.delete('/grocerylists', auth.checkAccessToken, user.deleteGroceryList);
 
-app.post('/v0/groceryrecipe', auth.checkAccessToken, user.addToNewGroceryList);
-app.post('/v0/groceryrecipeexisting', auth.checkAccessToken, user.addToExistingGroceryList);
-app.get('/v0/groceryrecipe', auth.checkAccessToken, user.getAllFromGroceryList);
-app.delete('/v0/groceryrecipe', auth.checkAccessToken, user.deleteFromGroceryList);
+app.post('/groceryrecipe', auth.checkAccessToken, user.addToNewGroceryList);
+app.post('/groceryrecipeexisting', auth.checkAccessToken, user.addToExistingGroceryList);
+app.get('/groceryrecipe', auth.checkAccessToken, user.getAllFromGroceryList);
+app.delete('/groceryrecipe', auth.checkAccessToken, user.deleteFromGroceryList);
 
-app.post('/v0/calendarrecipe', auth.checkAccessToken, user.addToMealCalendarTable);
-app.get('/v0/calendarrecipe', auth.checkAccessToken, user.getFromMealCalendarTable);
-app.delete('/v0/calendarrecipe', auth.checkAccessToken, user.deleteFromMealCalendarTable);
+app.post('/calendarrecipe', auth.checkAccessToken, user.addToMealCalendarTable);
+app.get('/calendarrecipe', auth.checkAccessToken, user.getFromMealCalendarTable);
+app.delete('/calendarrecipe', auth.checkAccessToken, user.deleteFromMealCalendarTable);
 
-app.get('/v0/recipesandlistnames', auth.checkAccessToken, user.getRecipesAndListNames);
+app.get('/recipesandlistnames', auth.checkAccessToken, user.getRecipesAndListNames);
 
 app.use((err, req, res, next) => {
   res.status(err.status).json({
