@@ -55,7 +55,7 @@ const CalendarComp = () => {
                 item.end = new Date(temp[i].planned + 'T12:00:00');
                 item.recipe = temp[i].recipe;
 
-                const copy = { title: item.title, allDay: item.allDay, start: item.start, end: item.end, recipe: item.recipe };
+                const copy = {title: item.title, allDay: item.allDay, start: item.start, end: item.end, recipe: item.recipe};
                 array.push(copy);
               } else if (temp[i].meal === 'Lunch') {
                 item.title = temp[i].title;
@@ -64,7 +64,7 @@ const CalendarComp = () => {
                 item.end = new Date(temp[i].planned + 'T17:00:00');
                 item.recipe = temp[i].recipe;
 
-                const copy = { title: item.title, allDay: item.allDay, start: item.start, end: item.end, recipe: item.recipe };
+                const copy = {title: item.title, allDay: item.allDay, start: item.start, end: item.end, recipe: item.recipe};
                 array.push(copy);
               } else if (temp[i].meal === 'Dinner') {
                 item.title = temp[i].title;
@@ -73,7 +73,7 @@ const CalendarComp = () => {
                 item.end = new Date(temp[i].planned + 'T22:00:00');
                 item.recipe = temp[i].recipe;
 
-                const copy = { title: item.title, allDay: item.allDay, start: item.start, end: item.end, recipe: item.recipe };
+                const copy = {title: item.title, allDay: item.allDay, start: item.start, end: item.end, recipe: item.recipe};
                 array.push(copy);
               }
             }
