@@ -32,6 +32,8 @@ const CalendarComp = () => {
         fetch('https://mealprephelper.herokuapp.com/calendarrecipe', {
           headers: new Headers({
             'Authorization': 'Bearer ' + accessToken,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
           }),
         })
           .then((results) => {

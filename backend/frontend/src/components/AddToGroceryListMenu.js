@@ -67,6 +67,8 @@ function LongMenuTemp(props) {
       fetch('https://mealprephelper.herokuapp.com/grocerylists', {
         headers: new Headers({
           'Authorization': 'Bearer ' + accessToken,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
         }),
       })
       .then((results) => {

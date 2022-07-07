@@ -108,6 +108,8 @@ export default function GroceryList2() {
           await fetch('https://mealprephelper.herokuapp.com/recipesandlistnames', {
             headers: new Headers({
               'Authorization': 'Bearer ' + accessToken,
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
             }),
           })
             .then((results) => {
@@ -199,6 +201,8 @@ export default function GroceryList2() {
       fetch('https://mealprephelper.com/grocerylists', {
         headers: new Headers({
           'Authorization': 'Bearer ' + accessToken,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
         }),
       })
         .then((results) => {

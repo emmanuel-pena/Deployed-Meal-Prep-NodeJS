@@ -10,6 +10,7 @@ const FavoriteRecipes = () => {
          method: 'GET',
          headers: new Headers({
            'Authorization': 'Bearer ' + user.accessToken,
+           'Accept': 'application/json',
            'Content-Type': 'application/json',
          }),
        })
