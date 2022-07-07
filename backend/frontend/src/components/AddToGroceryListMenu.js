@@ -197,7 +197,6 @@ function LongMenuTemp(props) {
         .catch((err) => {
           console.log(err);
         });
-    }
 
     setNewList('');
     handleClose();
