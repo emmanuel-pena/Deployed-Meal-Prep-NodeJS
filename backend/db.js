@@ -413,9 +413,9 @@ exports.getAllFromFavorites = async (memberIdd) => {
     for (let i = 0; i < rows.length; i++) {
       results.push(rows[i].info);
     }
-    return results;
+    return JSON.stringify(results);
   } else {
-    return [];
+    return JSON.stringify([]);
   }
 };
 
@@ -442,9 +442,9 @@ exports.getGroceryLists = async (memberIdd) => {
 
       results.push(item);
     }
-    return results;
+    return JSON.stringify(results);
   } else {
-    return [];
+    return JSON.stringify([]);
   }
 };
 
@@ -626,9 +626,9 @@ exports.getAllFromMealCalendarTable = async (userIdd) => {
   console.log(rows.length);
 
   if (rows.length > 0) {
-    return array;
+    return JSON.stringify(array);
   } else {
-    return [];
+    return JSON.stringify([]);
   }
 };
 
@@ -680,9 +680,9 @@ exports.getRecipesAndListNames = async (userIdd) => {
   console.log('db.js:\n:');
   console.log(returnedArray);
   if (rows.length > 0) {
-    return returnedArray;
+    return JSON.stringify(returnedArray);
   }
   else {
-    return [];
+    return JSON.stringify([]);
   }
 };
