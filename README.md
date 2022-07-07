@@ -1,2 +1,2 @@
 live link:
-mealprephelper.herokuapp.com
+https://mealprephelper.herokuapp.com
