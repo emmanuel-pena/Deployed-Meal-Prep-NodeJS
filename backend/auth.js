@@ -65,7 +65,7 @@ exports.googleAuth = async (req, res) => {
     const email = info.email;
     const picture = info.picture;
 
-    const secret = info.jwt;
+    const secrets = secret.accessToken;
 
     console.log(secret);
 
@@ -74,7 +74,7 @@ exports.googleAuth = async (req, res) => {
 
     const accessToken = jwt.sign(
       {email: email, id: id},
-      secret, {
+      secrets, {
         expiresIn: '25m',
         algorithm: 'HS256',
       });
