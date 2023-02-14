@@ -64,14 +64,15 @@ const LoginForm = () => {
     setValues({...values, [prop]: event.target.value});
   };
 
-  const handleGoogleSuccess = (googleData) => {
+  const handleGoogleSuccess = (googleData, jwt) => {
     try {
-      fetch('https://mealprephelper.herokuapp.com/google-login', {
+      fetch('http://localhost:3010/google-login', {
         method: 'POST',
         body: JSON.stringify({
           name: googleData.name,
           email: googleData.email,
           picture: googleData.picture,
+          jwt: jwt,
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -125,7 +126,7 @@ const LoginForm = () => {
         console.log(body);
       }
 
-      fetch('https://mealprephelper.herokuapp.com/login', {
+      fetch('http://localhost:3010/login', {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {
@@ -250,7 +251,8 @@ const LoginForm = () => {
           <GoogleLogin
             style={{width: 240}}
             onSuccess={(credentialResponse) => {
-              handleGoogleSuccess(jwt_decode(credentialResponse.credential));
+              console.log(credentialResponse.credential);
+              handleGoogleSuccess(jwt_decode(credentialResponse.credential), credentialResponse.credential);
             }}
 
             onError={() => {
