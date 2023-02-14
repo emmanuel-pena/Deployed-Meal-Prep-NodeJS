@@ -3,8 +3,6 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import {GoogleLogin} from 'react-google-login';
-import GoogleButton from 'react-google-button';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
@@ -13,6 +11,8 @@ import InputLabel from '@mui/material/InputLabel';
 import {TopDialogTitle, BottomDialogContentText, StyledFilledInput} from './Login.styles';
 import {useUserUpdate} from './providers/UserProvider';
 import {useNavigate} from 'react-router-dom';
+import {GoogleLogin} from '@react-oauth/google';
+import jwt_decode from 'jwt-decode';
 
 // global context
 import globalContext from './globalContext';
@@ -48,6 +48,7 @@ const LoginForm = () => {
     handleClose();
   };
 
+
   const handleClickShowPassword = () => {
     setValues({
       ...values,
@@ -64,10 +65,13 @@ const LoginForm = () => {
   };
 
   const handleGoogleSuccess = (googleData) => {
-      fetch('https://mealprephelper.herokuapp.com/google-login', {
+    try {
+      fetch('https://mealprephelper-herokuapp.com/google-login', {
         method: 'POST',
         body: JSON.stringify({
-          token: googleData.tokenId,
+          name: googleData.name,
+          email: googleData.email,
+          picture: googleData.picture,
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -82,6 +86,7 @@ const LoginForm = () => {
         })
         .then((json) => {
           localStorage.setItem('user', JSON.stringify(json));
+          console.log(json);
           updateUser(json);
           setLoginUser(JSON.parse(localStorage.getItem('user')));
           setLoginStatus(true);
@@ -91,16 +96,19 @@ const LoginForm = () => {
         .catch((err) => {
           console.log(err);
         });
+    } catch (e) {
+      console.log('console.loggin e');
+      console.log(e);
+    }
 
     handleClose();
   };
 
-  const handleGoogleError = (result) => {
-
-  };
-
   const loginUser = () => {
+    try {
       setLoginResponse(null);
+      console.log('inside loginUser)');
+      console.log('Logging in user!');
 
       const emailValidator = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -111,11 +119,13 @@ const LoginForm = () => {
 
       if ((param1).match(emailValidator)) {
         body = {email: param1, password: param2};
+        console.log(body);
       } else {
         body = {username: param1, password: param2};
+        console.log(body);
       }
 
-      fetch('https://mealprephelper.herokuapp.com/login', {
+      fetch('https://mealprephelper-herokuapp.com/login', {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {
@@ -144,6 +154,10 @@ const LoginForm = () => {
         .catch((err) => {
           console.log(err);
         });
+    } catch (e) {
+      console.log('console.loggin e');
+      console.log(e);
+    }
   };
 
   const handleLogin = () => {
@@ -234,21 +248,16 @@ const LoginForm = () => {
             } />
           <div>&nbsp;</div>
           <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-            buttonText='Sign in with Google'
-            onSuccess={handleGoogleSuccess}
-            onFailure={handleGoogleError}
-            cookiePolicy={'single_host_origin'}
-            render={(renderProps) => (
-              <GoogleButton
-                onClick={renderProps.onClick}
-                style={{width: 208}}
-              >
-                Sign In with Google
-              </GoogleButton>
-            )}
+            style={{width: 240}}
+            onSuccess={(credentialResponse) => {
+              handleGoogleSuccess(jwt_decode(credentialResponse.credential));
+            }}
 
-          />
+            onError={() => {
+              alert('Login Failed!');
+            }}
+            />
+
           <div>&nbsp;</div>
           {invalidLogin(loginResponse)}
         </DialogContent>

@@ -16,7 +16,9 @@
     "@material-ui/icons": "*",
     "@mui/icons-material": "*",
     "@mui/material": "^5.3.1",
+    "@react-oauth/google": "^0.7.0",
     "emoji-picker-react": "*",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
     "notistack": "^2.0.5",
     "prop-types": "*",
@@ -72,6 +74,8 @@
       "no-unused-vars": "off",
       "prefer-rest-params": "off",
       "indent": "off",
+      "no-undef": "off",
+      "camelcase": "off",
       "max-len": "off",
       "linebreak-style": "off"
     }
