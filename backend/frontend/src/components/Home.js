@@ -105,7 +105,8 @@ const Home = () => {
                    variant='h3'
                    color ='primary'
                    style={{marginLeft: windowWidth >600 ? 0 : 68,
-                    inlineSize: windowWidth >600 ? 'auto' : 300}}>
+                      inlineSize: windowWidth > 600 ? 'auto' : 300,
+                     fontFamily: 'Bogart-Semibold, Georgia, serif'}}>
                    Meal Prep Made Easy
                    </Typography>
               </Box>
