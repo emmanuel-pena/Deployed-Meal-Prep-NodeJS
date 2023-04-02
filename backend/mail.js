@@ -6,6 +6,7 @@ const fs = require('fs');
 
 exports.sendMail = async (email, subject, emailContent) => {
   const CLIENT_EMAIL = process.env.APP_EMAIL;
+  const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
   const CLIENT_ID = process.env.EMAIL_CLIENT_ID;
   const CLIENT_SECRET = process.env.EMAIL_CLIENT_SECRET;
   const REDIRECT_URI = process.env.CLIENT_REDIRECT_URI;
@@ -28,6 +29,7 @@ exports.sendMail = async (email, subject, emailContent) => {
       auth: {
         type: 'OAuth2',
         user: CLIENT_EMAIL,
+        pass: EMAIL_PASSWORD,
         clientId: CLIENT_ID,
         clientSecret: CLIENT_SECRET,
         refreshToken: REFRESH_TOKEN,
