@@ -26,14 +26,16 @@ exports.sendMail = async (email, subject, emailContent) => {
     // Create the email envelope (transport)
     const transport = nodemailer.createTransport({
       service: 'gmail',
+      host: 'smtp.gmail.com',
+      secure: true,
       auth: {
-        type: 'OAuth2',
         user: CLIENT_EMAIL,
         pass: EMAIL_PASSWORD,
-        clientId: CLIENT_ID,
-        clientSecret: CLIENT_SECRET,
-        refreshToken: REFRESH_TOKEN,
-        accessToken: accessToken,
+      },
+      secureConnection: 'false',
+      tls: {
+        ciphers: 'SSLv3',
+        rejectUnauthorized: false
       },
     });
     const mailOptions = {
