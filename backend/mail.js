@@ -20,9 +20,6 @@ exports.sendMail = async (email, subject, emailContent) => {
   OAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN});
 
   try {
-    // Generate the accessToken on the fly
-    const accessToken = await OAuth2Client.getAccessToken();
-
     // Create the email envelope (transport)
     const transport = nodemailer.createTransport({
       service: 'gmail',
